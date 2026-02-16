@@ -9,7 +9,7 @@ public class LibraryUI {
     private LibraryManager libraryManager;
     private JFrame mainFrame;
     private JPanel gridPanel;
-    private static final String SUPPORT_EMAIL = "bosskimrudsguston@gmail.com";
+    private static final String SUPPORT_EMAIL = "toledanajanlouis02@gmail.com";
 
     public LibraryUI() {
         this.libraryManager = LibraryManager.getInstance();
@@ -23,11 +23,11 @@ public class LibraryUI {
     private void showLoginDialog() {
         JFrame loginFrame = new JFrame();
         JPanel panel = createLoginPanel();
-        
+
         while (true) {
-            int input = JOptionPane.showConfirmDialog(loginFrame, panel, 
-                "Enter username and password:", JOptionPane.OK_CANCEL_OPTION);
-            
+            int input = JOptionPane.showConfirmDialog(loginFrame, panel,
+                    "Enter username and password:", JOptionPane.OK_CANCEL_OPTION);
+
             if (handleLoginResult(input, panel)) {
                 break;
             }
@@ -54,11 +54,11 @@ public class LibraryUI {
         JLabel forgotPasswordLabel = new JLabel("<html><a href=''>Forgot your password?</a></html>");
         forgotPasswordLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panel.add(forgotPasswordLabel, BorderLayout.SOUTH);
-        
+
         forgotPasswordLabel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(null, 
-                    "Please contact support at \"" + SUPPORT_EMAIL + "\".");
+                JOptionPane.showMessageDialog(null,
+                        "Please contact support at \"" + SUPPORT_EMAIL + "\".");
             }
         });
 
@@ -71,14 +71,14 @@ public class LibraryUI {
             return true;
         }
 
-        JTextField usernameInput = (JTextField) ((JPanel)panel.getComponent(1)).getComponent(0);
-        JPasswordField passwordInput = (JPasswordField) ((JPanel)panel.getComponent(1)).getComponent(1);
-        
+        JTextField usernameInput = (JTextField) ((JPanel) panel.getComponent(1)).getComponent(0);
+        JPasswordField passwordInput = (JPasswordField) ((JPanel) panel.getComponent(1)).getComponent(1);
+
         String username = usernameInput.getText();
         String password = new String(passwordInput.getPassword());
 
-        if (username.equals("admin") && password.equals("password") && 
-            input == JOptionPane.OK_OPTION) {
+        if (username.equals("admin") && password.equals("password") &&
+                input == JOptionPane.OK_OPTION) {
             initializeMainWindow();
             return true;
         } else if (input == JOptionPane.OK_OPTION) {
@@ -122,8 +122,8 @@ public class LibraryUI {
 
     private void setupButtonPanel() {
         JPanel buttonPanel = new JPanel();
-        String[] buttonLabels = {"Add", "Edit", "Delete", "Search", "Borrow", "Track", "Log Out"};
-        
+        String[] buttonLabels = { "Add", "Edit", "Delete", "Search", "Borrow", "Track", "Log Out" };
+
         for (String label : buttonLabels) {
             JButton button = new JButton(label);
             button.addActionListener(e -> handleButtonClick(label));
@@ -135,22 +135,36 @@ public class LibraryUI {
 
     private void handleButtonClick(String action) {
         switch (action) {
-            case "Add": new AddBookDialog(libraryManager, this).show(); break;
-            case "Edit": new EditBookDialog(libraryManager, this).show(); break;
-            case "Delete": new DeleteBookDialog(libraryManager, this).show(); break;
-            case "Search": new SearchBookDialog(libraryManager).show(); break;
-            case "Borrow": new BorrowBookDialog(libraryManager, this).show(); break;
-            case "Track": new TrackBorrowsDialog(libraryManager).show(); break;
-            case "Log Out": handleLogout(); break;
+            case "Add":
+                new AddBookDialog(libraryManager, this).show();
+                break;
+            case "Edit":
+                new EditBookDialog(libraryManager, this).show();
+                break;
+            case "Delete":
+                new DeleteBookDialog(libraryManager, this).show();
+                break;
+            case "Search":
+                new SearchBookDialog(libraryManager).show();
+                break;
+            case "Borrow":
+                new BorrowBookDialog(libraryManager, this).show();
+                break;
+            case "Track":
+                new TrackBorrowsDialog(libraryManager).show();
+                break;
+            case "Log Out":
+                handleLogout();
+                break;
         }
     }
 
     private void handleLogout() {
-        int logOutConfirmation = JOptionPane.showConfirmDialog(mainFrame, 
-            "Are you sure you want to log out?", 
-            "Confirmation", 
-            JOptionPane.YES_NO_OPTION);
-            
+        int logOutConfirmation = JOptionPane.showConfirmDialog(mainFrame,
+                "Are you sure you want to log out?",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+
         if (logOutConfirmation == JOptionPane.YES_OPTION) {
             mainFrame.dispose();
             System.exit(0);
