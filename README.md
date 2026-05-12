@@ -8,6 +8,14 @@ This is a Library Management System application built with Java.
 - Borrow and return books
 - (Add more features here as appropriate)
 
+## Developers
+- A. Apolonio
+- R. Calixto
+- M. Cruel
+- B. Dizon
+- K. Guston
+- J. Toledana
+
 ## Setup
 1. Clone the repository.
 2. Open the project in your preferred IDE (NetBeans, Eclipse, IntelliJ).
